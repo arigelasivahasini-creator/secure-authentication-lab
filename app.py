@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, session, redirect, url_for, render_template_string
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
@@ -7,7 +9,7 @@ import time
 app = Flask(__name__)
 
 # Secret key for signing sessions
-app.secret_key = "change-this-secret-key-for-production"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-only-secret-key")
 
 # Secure session configuration
 app.config["SESSION_COOKIE_HTTPONLY"] = True
